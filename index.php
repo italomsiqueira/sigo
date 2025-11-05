@@ -13,8 +13,7 @@
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>    
     <link rel="stylesheet" href="assets/css/cadastro.css">
     <title>Inicio</title>
-    <link rel="sho
-    rtcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
 </head>
 
 <body>
