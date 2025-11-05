@@ -158,9 +158,8 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                                     <option value="<?php echo $dados['id'] ?>" <?php if ($dados['id']==$turma) { ?>
                                         selected
                                         <?php } ?>>
-                                        <?php echo $dados['hora'] ?> -
-                                        <?php echo $dados['dia1'] ?> -
-                                        <?php echo $dados['dia2']; ?>
+                                        <?php echo $dados['ano'] ?> -
+                                        <?php echo $dados['turma']; ?>
                                     </option>
                                     <?php
                                     }

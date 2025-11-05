@@ -113,9 +113,8 @@ require('includes/conexao.php');
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Dia 1</th>
-                            <th scope="col">Dia 2</th>
+                            <th scope="col">Ano</th>
+                            <th scope="col">Turma</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Excluir</th>
                             <th scope="col">Ver</th>
@@ -127,9 +126,8 @@ require('includes/conexao.php');
                         $result = mysqli_query($conn, $sql);
                         while ($dados = mysqli_fetch_assoc($result)) {
                             $id = $dados['id'];
-                            $hora = $dados['hora'];
-                            $dia1 = $dados['dia1'];
-                            $dia2 = $dados['dia2'];
+                            $ano = $dados['ano'];
+                            $turma = $dados['turma'];
                             if ($id == 1) {
                                 echo "
                                 <script>
@@ -144,9 +142,8 @@ require('includes/conexao.php');
                             echo "
                            <tr>
                                 <td>$id</td>
-                                <td>$hora</td>
-                                <td>$dia1</td>
-                                <td>$dia2</td>
+                                <td>$ano</td>
+                                <td>$turma</td>
                                 <td>
                                 <a href='$urlUpdate' id='editar'>
                                 

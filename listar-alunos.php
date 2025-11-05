@@ -148,7 +148,7 @@ require('includes/conexao.php');
                             $result_turma = mysqli_query($conn, $turma_sql);
                             $result_turma2 = mysqli_fetch_assoc($result_turma);
                             if ($result_turma2) {
-                                $turma_final = $result_turma2['hora'] . "-" . $result_turma2['dia1'] . "-" . $result_turma2['dia2'];
+                                $turma_final = $result_turma2['ano'] . "-" . $result_turma2['turma'];
                             } else {
                                 $turma_final = "<strong>NÃO CADASTRADO!</strong>";
                             }

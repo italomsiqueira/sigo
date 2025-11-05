@@ -149,9 +149,8 @@ require('includes/conexao.php');
                                     while ($dados = mysqli_fetch_assoc($result)) {
                                     ?>
                                     <option value="<?php echo $dados['id']; ?>">
-                                        <?php echo $dados['hora'] ?> -
-                                        <?php echo $dados['dia1'] ?> -
-                                        <?php echo $dados['dia2']; ?>
+                                        <?php echo $dados['ano'] ?> -
+                                        <?php echo $dados['turma']; ?>
                                     </option>
                                     <?php
                                     }

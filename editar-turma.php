@@ -7,9 +7,8 @@ $resultado = mysqli_query($conn, $sql);
 
 while ($dados = mysqli_fetch_assoc($resultado)) {
     $id = $dados['id'];
-    $hora = $dados['hora'];
-    $dia1 = $dados['dia1'];
-    $dia2 = $dados['dia2'];   
+    $ano = $dados['ano'];
+    $turma = $dados['turma'];
 }
 ?>
 

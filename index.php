@@ -51,6 +51,18 @@
                         <a class="dropdown-item" href="listar-alunos.php">Ver alunos</a>
                     </div>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ocorrências
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="cadastrar-aluno.php">Cadastrar ocorrência</a>
+                        <a class="dropdown-item" href="listar-alunos.php">Ver ocorrências</a>
+                    </div>
+                </li>
+
                 <li class="nav-item active">
                     <a class="nav-link sair" href="login.php">Sair</a>
                 </li>

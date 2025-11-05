@@ -9,15 +9,14 @@ echo "</pre>";
 
 
 require('../includes/conexao.php');
-$hora = strtoupper($_POST['hora']);
-$dia1 = strtoupper($_POST['dia1']);
-$dia2 = strtoupper($_POST['dia2']);
+$ano = strtoupper($_POST['ano']);
+$turma = strtoupper($_POST['turma']);
 
 $sql = "
         INSERT INTO turma
-            (hora, dia1, dia2)
+            (ano, turma)
         VALUES
-            ('$hora', '$dia1', '$dia2')
+            ('$ano', '$turma')
 ";
 
 if(mysqli_query($conn, $sql)){    

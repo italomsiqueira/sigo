@@ -92,43 +92,39 @@
                 </div>
 
                 <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/salvar-turma.php">
-                    <p>* A duração de cada aula é de 1 hora.</p>
-
-                    <div class="bloco-input">
-                        <label class="form-label">Horário:</label>
-                        <input type="time" class="form-control" name="hora" id="hora">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
+                    
+                    <div class="col-md-6">
                             <div class="bloco-input">
-                                <label class="form-label">Dia 1</label>
-                                <select class="form-control" id="dia1" name="dia1">
+                                <label class="form-label">Ano</label>
+                                <select class="form-control" id="ano" name="ano">
                                     <option value="">Selecione....</option>
-                                    <option value="SEG">Segunda-feira</option>
-                                    <option value="TER">Terça-feira</option>
-                                    <option value="QUA">Quarta-feira</option>
-                                    <option value="QUI">Quinta-feira</option>
-                                    <option value="SEX">Sexta-feira</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="bloco-input">
-                                <label class="form-label">Dia 2</label>
-                                <select class="form-control" id="dia2" name="dia2">
+                                <label class="form-label">Turma</label>
+                                <select class="form-control" id="turma" name="turma">
                                     <option value="">Selecione....</option>
-                                    <option value="SEG">Segunda-feira</option>
-                                    <option value="TER">Terça-feira</option>
-                                    <option value="QUA">Quarta-feira</option>
-                                    <option value="QUI">Quinta-feira</option>
-                                    <option value="SEX">Sexta-feira</option>
+                                    <option value="a">A</option>
+                                    <option value="b">B</option>
                                 </select>
                             </div>
                         </div>
+                        
 
                         <div class="offset-md-1 col-md-10">
-                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarTurma();">Salvar</button>
+                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarTurma();">Salvar</button>                            
                         </div>
                 </form>
 

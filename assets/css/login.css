@@ -30,11 +30,11 @@ body{
     margin-bottom: 25px;
     background-color: #174F4E;
     border-color: rgba(0, 255, 255, 0);
-    color
+    
 }
 
 
-.bloco-info {
+.bloco-info {    
     background-color: #174F4E;
     min-height: 50vh;    
     border-radius: 5px 0px 0px 5px;

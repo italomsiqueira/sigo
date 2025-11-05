@@ -1,21 +1,16 @@
 /*Validação de turma*/
 function validarTurma(){
-    let hora = document.getElementById('hora').value;
-    let dia1 = document.getElementById('dia1').value;
-    let dia2 = document.getElementById('dia2').value;
+    let ano = document.getElementById('ano').value;
+    let turma = document.getElementById('turma').value;
     
-    if(hora == ""){
-        document.getElementById('erro').innerHTML = "<strong>Ops! Informe a hora.</strong>";
+    if(ano == ""){
+        document.getElementById('erro').innerHTML = "<strong>Ops! Selecione o ano da turma.</strong>";
         document.getElementById('erro').removeAttribute('hidden');
         document.getElementById('hora').focus();
-    }else if(dia1 == ""){
-        document.getElementById('erro').innerHTML = "<strong>Ops! Selecione o dia 1!</strong>";
+    }else if(turma == ""){
+        document.getElementById('erro').innerHTML = "<strong>Ops! Selecione a turma!</strong>";
         document.getElementById('erro').removeAttribute('hidden');
         document.getElementById('dia1').focus();
-    }else if(dia2 == ""){
-        document.getElementById('erro').innerHTML = "<strong>Ops! Selecione o dia 2!</strong>";
-        document.getElementById('erro').removeAttribute('hidden');
-        document.getElementById('dia2').focus();
     }else{
         document.getElementById('form-cadastro').removeAttribute('onsubmit');
     }

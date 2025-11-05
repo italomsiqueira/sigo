@@ -81,7 +81,8 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
         <div class="row">
             <div class="col-md-12 turma">
                 <h3>Turma
-                    <?php echo $idTurma ?>
+                    
+                    <?php echo $ano ?>
                 </h3>
 
                 <?php
@@ -132,7 +133,7 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
                             $turma_sql = "SELECT * FROM turma WHERE id = $turma";
                             $result_turma = mysqli_query($conn, $turma_sql);
                             $result_turma2 = mysqli_fetch_assoc($result_turma);
-                            $turma_final = $result_turma2['hora'] . "-" . $result_turma2['dia1'] . "-" . $result_turma2['dia2'];
+                            $turma_final = $result_turma2['ano'] . "-" . $result_turma2['turma'];
                             $urlDelete = "acoes/deletar-aluno.php?id=$id";
                             $urlUpdate = "editar-aluno.php?id=$id";
                             echo "
