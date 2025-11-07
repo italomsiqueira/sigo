@@ -36,6 +36,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
         $("#tel, #celular").mask("(00) 00000-0000");
         $('#cpf').mask("000.000.000-00");
     </script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
 </head>
 
 <body>
@@ -116,12 +117,12 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                                     $result = mysqli_query($conn, $sql);
                                     while ($dados = mysqli_fetch_assoc($result)) {
                                     ?>
-                                    <option value="<?php echo $dados['id'] ?>" <?php if ($dados['id']==$turma) { ?>
-                                        selected
-                                        <?php } ?>>
-                                        <?php echo $dados['ano'] ?> -
-                                        <?php echo $dados['turma']; ?>
-                                    </option>
+                                        <option value="<?php echo $dados['id'] ?>" <?php if ($dados['id'] == $turma) { ?>
+                                            selected
+                                            <?php } ?>>
+                                            <?php echo $dados['ano'] ?> -
+                                            <?php echo $dados['turma']; ?>
+                                        </option>
                                     <?php
                                     }
                                     ?>

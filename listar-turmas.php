@@ -15,6 +15,7 @@ require('includes/conexao.php');
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
     <script src="assets/js/validacoes.js"></script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Lista de turmas</title>
 </head>
 
@@ -22,7 +23,7 @@ require('includes/conexao.php');
     <?php
     include('layout/menu.php');
     ?>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -99,7 +100,7 @@ require('includes/conexao.php');
                             }
                             $urlDelete = "acoes/deletar-turma.php?id=$id";
                             $urlUpdate = "editar-turma.php?id=$id";
-                            $urlVer = "turma.php?id=$id";
+                            $urlVer = "turma.php?id=$id & ano=$ano & turma=$turma";
 
                             echo "
                            <tr>

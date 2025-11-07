@@ -21,12 +21,13 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="assets/css/cadastro.css">    
+    <link rel="stylesheet" href="assets/css/cadastro.css">
     <script src="assets/js/validacoes.js"></script>
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Editar Turma</title>
 </head>
 
@@ -35,7 +36,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
     <?php
     include('layout/menu.php');
     ?>
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="offset-md-3 col-md-6 bloco-login">
@@ -73,7 +74,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
 
                     <div class="bloco-input">
                         <label class="form-label">Horário:</label>
-                        <input type="time" class="form-control" name="hora" id="hora"  value="<?php echo $hora ?>">
+                        <input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora ?>">
                     </div>
 
                     <div class="row">
@@ -121,8 +122,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                                         <option value='QUI'>Quinta-feira</option>
                                         <option value='SEX' selected>Sexta-feira</option>
                                      ";
-                                    }                                    
-                                    else{
+                                    } else {
                                         echo "<option value='' selected>Selecione....</option>
                                         <option value='SEG'>Segunda-feira</option>
                                         <option value='TER'>Terça-feira</option>
@@ -141,7 +141,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                             <div class="bloco-input">
                                 <label class="form-label">Dia 2</label>
                                 <select class="form-control" id="dia2" name="dia2">
-                                <?php if ($dia2 == 'SEG') {
+                                    <?php if ($dia2 == 'SEG') {
                                         echo "<option value=''>Selecione....</option>
                                         <option value='SEG' selected>Segunda-feira</option>
                                         <option value='TER'>Terça-feira</option>
@@ -181,8 +181,7 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                                         <option value='QUI'>Quinta-feira</option>
                                         <option value='SEX' selected>Sexta-feira</option>
                                      ";
-                                    }                                    
-                                    else{
+                                    } else {
                                         echo "<option value='' selected>Selecione....</option>
                                         <option value='SEG'>Segunda-feira</option>
                                         <option value='TER'>Terça-feira</option>
@@ -197,9 +196,9 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
                         </div>
                     </div>
 
-                        <div class="offset-md-1 col-md-10">
-                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarEdicaoTurma();">Salvar</button>
-                        </div>
+                    <div class="offset-md-1 col-md-10">
+                        <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarEdicaoTurma();">Salvar</button>
+                    </div>
                 </form>
 
             </div>

@@ -1,6 +1,8 @@
 <?php
 require('includes/conexao.php');
 $idTurma = $_GET['id'];
+$anoTurma = $_GET['ano'];
+$turmaTurma = $_GET['turma'];
 $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
 ?>
 <!DOCTYPE html>
@@ -18,16 +20,17 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
     <script src="assets/js/jquery.btechco.excelexport.js"></script>
     <script src="assets/js/jquery.base64.js"></script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
 
     <title>Lista de alunos</title>
 
     <script>
-        $(document).ready(function () {
-            $("#btnExport").click(function () {
+        $(document).ready(function() {
+            $("#btnExport").click(function() {
                 $("#tblExport").btechco_excelexport({
-                    containerid: "tblExport"
-                    , datatype: $datatype.Table
-                    , filename: 'Lista de Turma'
+                    containerid: "tblExport",
+                    datatype: $datatype.Table,
+                    filename: 'Lista de Turma'
                 });
             });
         });
@@ -38,13 +41,16 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
     <?php
     include('layout/menu.php');
     ?>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 turma">
-                <h3>Turma
-                    
-                    <?php echo $ano ?>
+                <h3>Turma:
+
+                    <?php
+                    echo $anoTurma;
+                    echo $turmaTurma;
+                    ?>
                 </h3>
 
                 <?php
@@ -125,7 +131,7 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
                 </table>
             </div>
             <div>
-                <button class= "offset-md-4 col-md-4 btn btn-success" id="btnExport">Exportar para Excel</button>
+                <button class="offset-md-4 col-md-4 btn btn-success" id="btnExport">Exportar para Excel</button>
             </div>
         </div>
     </div>

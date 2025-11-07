@@ -1,5 +1,5 @@
 <?php
-require ('includes/conexao.php');
+require('includes/conexao.php');
 ?>
 
 <html>
@@ -15,7 +15,8 @@ require ('includes/conexao.php');
     <link rel="stylesheet" href="assets/css/login.css">
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
-    <title> Login de Usuário </title>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <title> Sigo - Login de Usuário </title>
 </head>
 
 <body>

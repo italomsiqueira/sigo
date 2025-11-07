@@ -12,6 +12,7 @@
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Cadastrar turma</title>
 </head>
 
@@ -19,7 +20,7 @@
     <?php
     include('layout/menu.php');
     ?>
-    
+
     <div class="container-fluid">
 
 
@@ -54,40 +55,40 @@
                 </div>
 
                 <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/salvar-turma.php">
-                    
+
                     <div class="col-md-6">
-                            <div class="bloco-input">
-                                <label class="form-label">Ano</label>
-                                <select class="form-control" id="ano" name="ano">
-                                    <option value="">Selecione....</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                </select>
-                            </div>
+                        <div class="bloco-input">
+                            <label class="form-label">Ano</label>
+                            <select class="form-control" id="ano" name="ano">
+                                <option value="">Selecione....</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="col-md-6">
-                            <div class="bloco-input">
-                                <label class="form-label">Turma</label>
-                                <select class="form-control" id="turma" name="turma">
-                                    <option value="">Selecione....</option>
-                                    <option value="a">A</option>
-                                    <option value="b">B</option>
-                                </select>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="bloco-input">
+                            <label class="form-label">Turma</label>
+                            <select class="form-control" id="turma" name="turma">
+                                <option value="">Selecione....</option>
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                            </select>
                         </div>
-                        
+                    </div>
 
-                        <div class="offset-md-1 col-md-10">
-                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarTurma();">Salvar</button>                            
-                        </div>
+
+                    <div class="offset-md-1 col-md-10">
+                        <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarTurma();">Salvar</button>
+                    </div>
                 </form>
 
             </div>

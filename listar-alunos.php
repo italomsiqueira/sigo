@@ -18,15 +18,16 @@ require('includes/conexao.php');
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="assets/js/jquery.btechco.excelexport.js"></script>
     <script src="assets/js/jquery.base64.js"></script>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Lista de alunos</title>
 
     <script>
-        $(document).ready(function () {
-            $("#btnExport").click(function () {
+        $(document).ready(function() {
+            $("#btnExport").click(function() {
                 $("#tblExport").btechco_excelexport({
-                    containerid: "tblExport"
-                    , datatype: $datatype.Table
-                    , filename: 'Lista de Alunos'
+                    containerid: "tblExport",
+                    datatype: $datatype.Table,
+                    filename: 'Lista de Alunos'
                 });
             });
         });
@@ -37,7 +38,7 @@ require('includes/conexao.php');
     <?php
     include('layout/menu.php');
     ?>
-    
+
     <div class="container">
 
         <div class="row">
@@ -143,13 +144,13 @@ require('includes/conexao.php');
                 </table>
             </div>
             <div>
-                <button class= "offset-md-4 col-md-4 btn btn-success" id="btnExport">Exportar para Excel</button>
+                <button class="offset-md-4 col-md-4 btn btn-success" id="btnExport">Exportar para Excel</button>
             </div>
         </div>
     </div>
 
 
-    
+
 </body>
 
 </html>
