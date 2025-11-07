@@ -17,7 +17,7 @@ include('layout/head.php');
 
 
         <div class="row">
-            <div class="offset-md-3 col-md-6 bloco-login">
+            <div class="offset-md-3 col-md-6 bloco-cadastro">
                 <h3>Cadastrar Turma</h3>
 
                 <?php
