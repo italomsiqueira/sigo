@@ -15,10 +15,10 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 $titulo = "Editar turma"; // ou outro título
 $exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+include('layout/head.php');
 ?>
 
 <body>
@@ -30,8 +30,10 @@ include('layout/head.php');
     <div class="container-fluid">
         <div class="row">
             <div class="offset-md-3 col-md-6 bloco-login">
-                <h3>Alterar - Turma
-                    <?php echo $id ?>
+                <h3>Alterar Turma:
+                    <?php
+                    echo $ano . "-" . $turma;
+                    ?>
                 </h3>
 
                 <?php
@@ -62,9 +64,62 @@ include('layout/head.php');
                 <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/editar-turma.php">
                     <input type="hidden" name="id" value="<?php echo $id ?>">
 
+                    <div class="col-md-6">
+                        <div class="bloco-input">
+                            <label class="form-label">Ano</label>
+                            <select class="form-control" id="ano" name="ano">
+                                <option value="">Selecione...</option>
+                                <?php
+                                $series = [
+                                    '1' => '1',
+                                    '2' => '2',
+                                    '3' => '3',
+                                    '4' => '4',
+                                    '5' => '5',
+                                    '6' => '6',
+                                    '7' => '7',
+                                    '8' => '8',
+                                    '9' => '9'
+                                ];
+
+                                foreach ($series as $valor => $nome) {
+                                    $selected = ($ano == $valor) ? 'selected' : '';
+                                    echo "<option value='$valor' $selected>$nome</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="bloco-input">
+                            <label class="form-label">Turma</label>
+                            <select class="form-control" id="turma" name="turma">
+                                <option value="">Selecione...</option>
+                                <option value="A" <?= ($turma == 'A') ? 'selected' : '' ?>>A</option>
+                                <option value="B" <?= ($turma == 'B') ? 'selected' : '' ?>>B</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="offset-md-1 col-md-10">
+                        <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarTurma();">Salvar</button>
+                    </div>
+                </form>
+
+
+                <!-- Formulário antigo 
+
+                <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/editar-turma.php">
+                    <input type="hidden" name="id" value="<?php //echo $id 
+                                                            ?>">
+
                     <div class="bloco-input">
                         <label class="form-label">Horário:</label>
-                        <input type="time" class="form-control" name="hora" id="hora" value="<?php echo $hora ?>">
+                        <input type="time" class="form-control" name="hora" id="hora" value="<?php //echo $hora 
+                                                                                                ?>">
                     </div>
 
                     <div class="row">
@@ -72,7 +127,7 @@ include('layout/head.php');
                             <div class="bloco-input">
                                 <label class="form-label">Dia 1</label>
                                 <select class="form-control" id="dia1" name="dia1">
-                                    <?php if ($dia1 == 'SEG') {
+                                    <?php /*if ($dia1 == 'SEG') {
                                         echo "<option value=''>Selecione....</option>
                                         <option value='SEG' selected>Segunda-feira</option>
                                         <option value='TER'>Terça-feira</option>
@@ -121,7 +176,7 @@ include('layout/head.php');
                                         <option value='SEX'>Sexta-feira</option>
                                         ";
                                     }
-                                    ?>
+                                    */ ?>
 
 
                                 </select>
@@ -131,7 +186,7 @@ include('layout/head.php');
                             <div class="bloco-input">
                                 <label class="form-label">Dia 2</label>
                                 <select class="form-control" id="dia2" name="dia2">
-                                    <?php if ($dia2 == 'SEG') {
+                                    <?php /*if ($dia2 == 'SEG') {
                                         echo "<option value=''>Selecione....</option>
                                         <option value='SEG' selected>Segunda-feira</option>
                                         <option value='TER'>Terça-feira</option>
@@ -180,7 +235,7 @@ include('layout/head.php');
                                         <option value='SEX'>Sexta-feira</option>
                                         ";
                                     }
-                                    ?>
+                                    */ ?>
                                 </select>
                             </div>
                         </div>
@@ -190,7 +245,7 @@ include('layout/head.php');
                         <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarEdicaoTurma();">Salvar</button>
                     </div>
                 </form>
-
+                Formulário antigo fim -->
             </div>
 
         </div>

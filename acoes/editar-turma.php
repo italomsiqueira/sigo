@@ -1,15 +1,13 @@
 <?php
 require('../includes/conexao.php');
 $id = $_POST['id'];
-$hora = strtoupper($_POST['hora']);
-$dia1 = strtoupper($_POST['dia1']);
-$dia2 = strtoupper($_POST['dia2']);
+$ano = strtoupper($_POST['ano']);
+$turma = strtoupper($_POST['turma']);
 
 $sql = "
     UPDATE turma SET
-    hora = '$hora',
-    dia1 = '$dia1',
-    dia2 = '$dia2'
+    ano = '$ano',
+    turma = '$turma'
     WHERE id = $id";
 
 if ($id == 1) {

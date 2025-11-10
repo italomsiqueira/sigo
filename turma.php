@@ -25,8 +25,7 @@ include('layout/head.php');
                 <h3>Turma:
 
                     <?php
-                    echo $anoTurma;
-                    echo $turmaTurma;
+                    echo $anoTurma . $turmaTurma;
                     ?>
                 </h3>
 
