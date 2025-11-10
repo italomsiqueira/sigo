@@ -29,7 +29,7 @@ include('layout/head.php');
 
     <div class="container-fluid">
         <div class="row">
-            <div class="offset-md-3 col-md-6 bloco-login">
+            <div class="offset-md-3 col-md-6 bloco-cadastro">
                 <h3>Alterar Turma:
                     <?php
                     echo $ano . "-" . $turma;

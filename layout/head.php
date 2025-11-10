@@ -9,6 +9,7 @@
     <!-- CSS Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
     <!-- CSS personalizados -->
     <link rel="stylesheet" href="assets/css/cadastro.css">
@@ -19,6 +20,7 @@
     <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <!-- Scripts personalizados -->
     <script src="assets/js/validacoes.js"></script>
@@ -33,15 +35,15 @@
     <script type="text/javascript">
         // Máscaras de telefone e CPF
         $(document).ready(function() {
-            if($("#tel, #celular").length) {
+            if ($("#tel, #celular").length) {
                 $("#tel, #celular").mask("(00) 00000-0000");
             }
-            if($('#cpf').length) {
+            if ($('#cpf').length) {
                 $('#cpf').mask("000.000.000-00");
             }
 
             // Exportação de tabela Excel
-            if($("#btnExport").length && $("#tblExport").length) {
+            if ($("#btnExport").length && $("#tblExport").length) {
                 $("#btnExport").click(function() {
                     $("#tblExport").btechco_excelexport({
                         containerid: "tblExport",
@@ -52,4 +54,9 @@
             }
         });
     </script>
+
+    <!-- TableExport -->
+    <script src="https://cdn.jsdelivr.net/npm/tableexport@5.2.0/dist/js/tableexport.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 </head>

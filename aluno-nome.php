@@ -70,7 +70,11 @@ include('layout/head.php');
                             $turma_sql = "SELECT * FROM turma WHERE id = $turma";
                             $result_turma = mysqli_query($conn, $turma_sql);
                             $result_turma2 = mysqli_fetch_assoc($result_turma);
-                            $turma_final = $result_turma2['ano'] . "-" . $result_turma2['turma'];
+                            if ($result_turma2) {
+                                $turma_final = $result_turma2['ano'] . "-" . $result_turma2['turma'];
+                            } else {
+                                $turma_final = "<strong>NÃO CADASTRADO!</strong>";
+                            }
                             $urlDelete = "acoes/deletar-aluno.php?id=$id";
                             $urlUpdate = "editar-aluno.php?id=$id";
                             echo "
@@ -100,7 +104,7 @@ include('layout/head.php');
                 </table>
 
                 <a href="listar-alunos.php">
-                    <button class='offset-md-4 col-md-4 btn btn-success btn-sm'>Voltar</button>
+                    <button class='offset-md-4 col-md-4 btn btn-info btn-sm'>Voltar</button>
                 </a>
 
             </div>
