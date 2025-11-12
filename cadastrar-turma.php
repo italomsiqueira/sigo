@@ -1,17 +1,21 @@
+<?php
+require('includes/protecao.php');
+require('includes/conexao.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 $titulo = "Cadastrar Turma"; // ou outro título
 $exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+include('layout/head.php');
 ?>
 
 <body>
     <?php
     include('layout/menu.php');
     ?>
-
+    <p></p>
     <div class="container-fluid">
 
 

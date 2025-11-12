@@ -1,10 +1,15 @@
+<?php
+require('includes/protecao.php');
+require('includes/conexao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 $titulo = "Página Inicial"; // ou outro título
 $exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+include('layout/head.php');
 ?>
 
 
@@ -12,9 +17,9 @@ include('layout/head.php');
     <?php
     include('layout/menu.php');
     ?>
+    <p></p>
 
-
-        <div class="offset-md-4 col-md-4 bloco-logo"></div>
+    <div class="offset-md-4 col-md-4 bloco-logo"></div>
 
 
 </body>

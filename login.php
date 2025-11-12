@@ -1,105 +1,75 @@
 <?php
 require('includes/conexao.php');
+session_start();
+
+// Se já estiver logado, redireciona para o painel
+if (isset($_SESSION['usuario_id'])) {
+    header('Location: index.php');
+    exit;
+}
+
+// Mensagem de alerta
+$msg = $_GET['msg'] ?? '';
 ?>
 
-<html>
-
-<?php
-$titulo = "Login"; // ou outro título
-$exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php');
-?>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/css/login-premium.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+    <div class="login-card">
+        <img src="assets/img/logo-cinza.png" class="logo" alt="Logo">
 
-
-
-    <div class="container-fluid">
-
-        <div class="offset-md-3 col-md-6 bloco-login">
-            <div class="row">
-                <div class="col-md-6 bloco-info">
-                    <center>
-                        <img src="assets/img/logo-cinza.png" class="logo" min-width="100%">
-
-                        <div class="col-md-10">
-                            <h4>  </h4>
-                        </div>
-
-                    </center>
-                </div>
-
-                <div class="col-md-6 bloco-form">
-                    <form id="form-login" onsubmit="return false" method="POST" action="acoes/login.php">
-                        <div class="login">
-
-                            <div class="alert alert-danger col-md-12" id="erro" hidden> </div>
-                            <?php
-
-                            if (isset($_GET['msg'])) {
-                                $msg = $_GET['msg'];
-                                if ($msg == 'sucesso') {
-                                    echo "
-                                        <div class='alert alert-success col-md-12'>
-                                            <strong>Logado com sucesso! Aguarde</strong>
-                                        </div>
-                                        ";
-                                    header('Location: ../infocurso/index.php');
-                                } else if ($msg == 'errologin') {
-                                    echo "
-                                        <div class='alert alert-danger col-md-12'>
-                                            <strong>Usuário incorreto!</strong>
-                                        </div>
-                                        ";
-                                } else if ($msg == 'errosenha') {
-                                    echo "
-                                        <div class='alert alert-danger col-md-12'>
-                                            <strong>Senha incorreta!</strong>
-                                        </div>
-                                        ";
-                                } else {
-                                    echo "
-                                        <div class='alert alert-danger col-md-12'>
-                                            <strong>ERRO!</strong>
-                                        </div>
-                                        ";
-                                }
-                            }
-                            ?>
-
-                            <div class="offset-md-1 col-md-10 bloco-input">
-                                <label class="form-label">Login:</label>
-                                <input type="text" class="form-control" name="login" id="login">
-                            </div>
-
-                            <div class="offset-md-1 col-md-10 bloco-input">
-                                <label class="form-label">Senha:</label>
-                                <input type="password" class="form-control" name="senha" id="senha">
-                            </div>
-
-                            <div class="offset-md-1 col-md-10">
-                                <a href="principal.html">
-                                    <button class="btn btn-success col-md-12 btn-salvar"
-                                        onclick="validarLogin();">Entrar no sistema</button>
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </form>
-                </div>
+        <?php if ($msg): ?>
+            <div class="alert alert-<?php
+                switch ($msg) {
+                    case 'errologin': echo 'danger'; break;
+                    case 'errosenha': echo 'danger'; break;
+                    case 'logout': echo 'success'; break;
+                    case 'naoautorizado': echo 'warning'; break;
+                    default: echo 'info';
+                }
+            ?> alert-dismissible fade show" role="alert">
+                <?php
+                    switch ($msg) {
+                        case 'errologin': echo "<strong>Usuário incorreto!</strong>"; break;
+                        case 'errosenha': echo "<strong>Senha incorreta!</strong>"; break;
+                        case 'logout': echo "<strong>Logout realizado com sucesso!</strong>"; break;
+                        case 'naoautorizado': echo "<strong>Faça login para acessar o sistema.</strong>"; break;
+                        default: echo htmlspecialchars($msg);
+                    }
+                ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
-        </div>
+        <?php endif; ?>
 
+        <form method="POST" action="acoes/login.php">
+            <div class="mb-3 text-start">
+                <label class="form-label"><i class="bi bi-person-fill me-1"></i>Login</label>
+                <input type="text" class="form-control" name="login" required>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label class="form-label"><i class="bi bi-key-fill me-1"></i>Senha</label>
+                <input type="password" class="form-control" name="senha" required>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-2"><i class="bi bi-box-arrow-in-right me-1"></i>Entrar no sistema</button>
+        </form>
+
+        <div class="login-footer">
+            &copy; <?= date('Y') ?> Sistema SIGO
+        </div>
     </div>
 
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

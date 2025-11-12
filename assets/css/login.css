@@ -11,10 +11,7 @@ body{
 }
 
 .bloco-login {
-    margin-top: 8%;
-    -webkit-box-shadow: 10px 10px 15px 4px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px 10px 15px 4px rgba(0, 0, 0, 0.75);
-    box-shadow: 10px 10px 15px 4px rgba(0, 0, 0, 0.75);
+    padding-top: 8%;
     border-radius: 5px 5px 5px 5px;
 }
 

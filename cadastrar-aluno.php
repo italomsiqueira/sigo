@@ -1,4 +1,5 @@
 <?php
+require('includes/protecao.php');
 require('includes/conexao.php');
 ?>
 <!DOCTYPE html>
@@ -14,7 +15,7 @@ include('layout/head.php');
     <?php
     include('layout/menu.php');
     ?>
-    
+    <p></p>
     <div class="container-fluid">
 
 

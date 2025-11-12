@@ -1,4 +1,5 @@
 <?php
+require('includes/protecao.php');
 require('includes/conexao.php');
 $id = $_GET['id'];
 $sql = "SELECT * FROM turma WHERE id = $id";
@@ -26,7 +27,7 @@ include('layout/head.php');
     <?php
     include('layout/menu.php');
     ?>
-
+    <p></p>
     <div class="container-fluid">
         <div class="row">
             <div class="offset-md-3 col-md-6 bloco-cadastro">

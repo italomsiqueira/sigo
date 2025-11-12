@@ -1,5 +1,8 @@
 <?php
+
+require('includes/protecao.php');
 require('includes/conexao.php');
+
 $idTurma = $_GET['id'];
 $anoTurma = $_GET['ano'];
 $turmaTurma = $_GET['turma'];
@@ -8,18 +11,19 @@ $sqlTurma = "SELECT * FROM alunos WHERE turma = $idTurma";
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 $titulo = "Lista de alunos da turma"; // ou outro título
 $exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+include('layout/head.php');
 ?>
 
 <body>
     <?php
     include('layout/menu.php');
     ?>
-
+    <p></p>
     <div class="container">
+        <p></p>
         <div class="row">
             <div class="col-md-12 turma">
                 <h3>Turma:

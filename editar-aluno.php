@@ -1,4 +1,5 @@
 <?php
+require('includes/protecao.php');
 require('includes/conexao.php');
 $id = $_GET['id'];
 $sql = "SELECT * FROM alunos WHERE id = $id";
@@ -19,10 +20,10 @@ while ($dados = mysqli_fetch_assoc($resultado)) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 $titulo = "Editar aluno"; // ou outro título
 $exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+include('layout/head.php');
 ?>
 
 <body>
@@ -30,7 +31,7 @@ include('layout/head.php');
     <?php
     include('layout/menu.php');
     ?>
-
+    <p></p>
     <div class="container-fluid">
         <div class="row">
             <div class="offset-md-3 col-md-6 bloco-cadastro">

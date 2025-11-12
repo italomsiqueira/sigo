@@ -1,4 +1,5 @@
 <?php
+require('includes/protecao.php');
 require('includes/conexao.php');
 ?>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include('layout/head.php');
 
 <body>
     <?php include('layout/menu.php'); ?>
-
+    <p></p>
     <div class="container mt-4">
         <h3 class="text-center mb-4">Lista de Ocorrências</h3>
 

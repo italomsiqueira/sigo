@@ -5,13 +5,15 @@ require('includes/conexao.php');
 <html lang="pt-br">
 
 <?php
+require('includes/protecao.php');
+require('includes/conexao.php');
 $titulo = "Ocorrências por Aluno";
 include('layout/head.php');
 ?>
 
 <body>
     <?php include('layout/menu.php'); ?>
-
+    <p></p>
     <div class="container">
 
         <div class="row">
@@ -21,22 +23,19 @@ include('layout/head.php');
 
             <!-- 🔍 Filtros -->
             <form id="form-filtro" method="GET" action="">
-                <div class="col-md-6">
-                    <div class="bloco-input">
+                <div class="row g-2 align-items-end">
+                    <div class="col-md-6">
                         <input type="text" class="form-control" name="nomeBusca" id="nomeBusca"
                             placeholder="Digite o nome do aluno..."
-                            value="<?php echo isset($_GET['nomeBusca']) ? htmlspecialchars($_GET['nomeBusca']) : ''; ?>">
+                            value="<?= isset($_GET['nomeBusca']) ? htmlspecialchars($_GET['nomeBusca']) : ''; ?>">
                     </div>
-                </div>
 
-                <div class="col-md-2">
-                    <div class="bloco-input">
+                    <div class="col-md-2">
                         <select name="turmaBusca" id="turmaBusca" class="form-control">
                             <option value="">Todas as turmas...</option>
                             <?php
                             $turmas_sql = "SELECT id, ano, turma FROM turma ORDER BY ano, turma";
                             $turmas_res = mysqli_query($conn, $turmas_sql);
-
                             while ($t = mysqli_fetch_assoc($turmas_res)) {
                                 $selected = (isset($_GET['turmaBusca']) && $_GET['turmaBusca'] == $t['id']) ? 'selected' : '';
                                 echo "<option value='{$t['id']}' $selected>{$t['ano']}-{$t['turma']}</option>";
@@ -44,15 +43,17 @@ include('layout/head.php');
                             ?>
                         </select>
                     </div>
-                </div>
 
-                <div class="col-md-2">
-                    <button class="btn btn-dark col-md-12" type="submit">Filtrar</button>
-                </div>
-                <div class="col-md-2">
-                    <a href="<?php echo basename($_SERVER['PHP_SELF']); ?>" class="btn btn-danger col-md-12">Limpar filtros</a>
+                    <div class="col-md-2">
+                        <button class="btn btn-dark w-100" type="submit">Filtrar</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="<?= basename($_SERVER['PHP_SELF']); ?>" class="btn btn-danger w-100">Limpar filtros</a>
+                    </div>
                 </div>
             </form>
+
 
             <div class="col-md-12 mt-4">
                 <?php

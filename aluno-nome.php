@@ -1,4 +1,5 @@
 <?php
+require('includes/protecao.php');
 require('includes/conexao.php');
 $nomeBusca = strtoupper($_GET['nomeBusca']);
 $sqlTurma = "SELECT * FROM alunos WHERE nome LIKE '$nomeBusca%'";
@@ -16,7 +17,7 @@ include('layout/head.php');
     <?php
     include('layout/menu.php');
     ?>
-    
+    <p></p>
     <div class="container">
         <div class="row">
             <div class="col-md-12 turma">

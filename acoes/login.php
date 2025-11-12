@@ -1,35 +1,37 @@
 <?php
-require ('../includes/conexao.php');
-$login1 = $_POST['login'];
-$senha1 = $_POST['senha'];
+session_start();
+require('../includes/conexao.php');
 
-$sqlLogin = "SELECT * FROM usuarios";
-$result = mysqli_query($conn, $sqlLogin);
-while ($dados = mysqli_fetch_assoc($result)) {
-    $login2 = $dados['login'];
-    $senha2 = $dados['senha'];
-
-    if ($login1 == $login2) {
-        if ($senha1 == $senha2) {
-            echo "
-    <script>
-        location.href = '../login.php?msg=sucesso'
-    </script>
-    ";
-        } else {
-            echo "
-    <script>
-        location.href = '../login.php?msg=errosenha'
-    </script>
-    ";
-        }
-    } else {
-        echo "
-    <script>
-        location.href = '../login.php?msg=errologin'
-    </script>
-    ";
-    }
+if (!isset($_POST['login'], $_POST['senha'])) {
+    header('Location: ../login.php?msg=camposvazios');
+    exit;
 }
 
+$login = mysqli_real_escape_string($conn, $_POST['login']);
+$senha = $_POST['senha'];
+
+// Busca o usuário
+$sql = "SELECT * FROM usuarios WHERE login = '$login' LIMIT 1";
+$result = mysqli_query($conn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_assoc($result);
+
+    if (password_verify($senha, $user['senha'])) {
+        $_SESSION['usuario_id'] = $user['id'];
+        $_SESSION['usuario_nome'] = $user['nome'];
+        $_SESSION['usuario_nivel'] = $user['nivel'];
+        $_SESSION['usuario_login'] = $user['login'];
+        $_SESSION['usuario_foto'] = $user['foto'] ?? 'assets/img/user-placeholder.png';
+
+        header('Location: ../index.php');
+        exit;
+    } else {
+        header('Location: ../login.php?msg=errosenha');
+        exit;
+    }
+} else {
+    header('Location: ../login.php?msg=errologin');
+    exit;
+}
 ?>
