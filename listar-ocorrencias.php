@@ -5,142 +5,98 @@ require('includes/conexao.php');
 <html lang="pt-br">
 
 <?php
-$titulo = "Ocorrências por Aluno";
+$titulo = "Lista de Ocorrências";
 include('layout/head.php');
 ?>
 
 <body>
     <?php include('layout/menu.php'); ?>
 
-    <div class="container">
+    <div class="container mt-4">
+        <h3 class="text-center mb-4">Lista de Ocorrências</h3>
 
-        <div class="row">
-            <div class="alert alert-danger col-md-12" id="erro" hidden></div>
+        <?php
+        // Consulta todas as ocorrências com os alunos envolvidos
+        $sql = "
+            SELECT 
+                o.id AS ocorrencia_id, 
+                o.descricao, 
+                o.data,
+                GROUP_CONCAT(SUBSTRING_INDEX(a.nome, ' ', 1) SEPARATOR ', ') AS alunos
+            FROM ocorrencia o
+            LEFT JOIN ocorrencia_aluno oa ON oa.ocorrencia_id = o.id
+            LEFT JOIN alunos a ON a.id = oa.alunos_id
+            GROUP BY o.id, o.descricao, o.data
+            ORDER BY o.data DESC
+        ";
 
-            <h3 class="text-center mb-4">Ocorrências por Aluno</h3>
+        $res = mysqli_query($conn, $sql);
 
-            <!-- 🔍 Filtros -->
-            <form id="form-filtro" method="GET" action="">
-                <div class="col-md-6">
-                    <div class="bloco-input">
-                        <input type="text" class="form-control" name="nomeBusca" id="nomeBusca"
-                            placeholder="Digite o nome do aluno..."
-                            value="<?php echo isset($_GET['nomeBusca']) ? htmlspecialchars($_GET['nomeBusca']) : ''; ?>">
-                    </div>
-                </div>
+        // Verifica se houve erro na query
+        if (!$res) {
+            echo "<div class='alert alert-danger'>
+                    Erro ao executar consulta: " . mysqli_error($conn) . "
+                  </div>";
+            exit;
+        }
+        ?>
 
-                <div class="col-md-2">
-                    <div class="bloco-input">
-                        <select name="turmaBusca" id="turmaBusca" class="form-control">
-                            <option value="">Todas as turmas...</option>
-                            <?php
-                            $turmas_sql = "SELECT id, ano, turma FROM turma ORDER BY ano, turma";
-                            $turmas_res = mysqli_query($conn, $turmas_sql);
+        <?php
+        if (isset($_GET['msg'])) {
+            $msg = $_GET['msg'];
+            if ($msg == 'sucesso') {
+                echo "
+                            <div class='alert alert-success col-md-12'>
+                                <strong>Deletado com sucesso!</strong>
+                            </div>
+                            ";
+            } else {
+                echo "
+                            <div class='alert alert-danger col-md-12'>
+                                <strong>Ops! Erro ao deletar!</strong>
+                            </div>
+                            ";
+            }
+        }
+        ?>
 
-                            while ($t = mysqli_fetch_assoc($turmas_res)) {
-                                $selected = (isset($_GET['turmaBusca']) && $_GET['turmaBusca'] == $t['id']) ? 'selected' : '';
-                                echo "<option value='{$t['id']}' $selected>{$t['ano']}-{$t['turma']}</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <button class="btn btn-dark col-md-12" type="submit">Filtrar</button>
-                </div>
-                <div class="col-md-2">
-                    <a href="<?php echo basename($_SERVER['PHP_SELF']); ?>" class="btn btn-danger col-md-12">Limpar filtros</a>
-                </div>
-            </form>
-
-            <div class="col-md-12 mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Alunos Envolvidos</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
-                if (isset($_GET['msg'])) {
-                    $msg = $_GET['msg'];
-                    if ($msg == 'sucesso') {
-                        echo "<div class='alert alert-success col-md-12'><strong>Ocorrência removida com sucesso!</strong></div>";
-                    } else {
-                        echo "<div class='alert alert-danger col-md-12'><strong>Ops! Erro ao processar a solicitação!</strong></div>";
+                if (mysqli_num_rows($res) > 0) {
+                    while ($oc = mysqli_fetch_assoc($res)) {
+                        $id = $oc['ocorrencia_id'];
+                        $data = !empty($oc['data']) ? date('d/m/Y', strtotime($oc['data'])) : '-';
+                        $descricao = htmlspecialchars($oc['descricao'] ?? '');
+                        $alunos = htmlspecialchars($oc['alunos'] ?? 'Nenhum');
+
+                        echo "
+                            <tr>
+                                <td>$id</td>
+                                <td>$data</td>
+                                <td>$descricao</td>
+                                <td>$alunos</td>
+                                <td>
+                                    <a href='ver-ocorrencia.php?id=$id' class='btn btn-sm btn-dark'>Ver Detalhes</a>
+                                </td>
+                            </tr>
+                        ";
                     }
+                } else {
+                    echo "<tr><td colspan='5' class='text-center'>Nenhuma ocorrência registrada.</td></tr>";
                 }
                 ?>
-
-                <table class="table" id="tblExport">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Turma</th>
-                            <th scope="col">Qtd. Ocorrências</th>
-                            <th scope="col">Detalhes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Filtros dinâmicos
-                        $filtros = [];
-                        if (!empty($_GET['nomeBusca'])) {
-                            $nomeBusca = mysqli_real_escape_string($conn, $_GET['nomeBusca']);
-                            $filtros[] = "a.nome LIKE '%$nomeBusca%'";
-                        }
-                        if (!empty($_GET['turmaBusca'])) {
-                            $turmaBusca = mysqli_real_escape_string($conn, $_GET['turmaBusca']);
-                            $filtros[] = "a.turma = '$turmaBusca'";
-                        }
-
-                        $where = count($filtros) > 0 ? "WHERE " . implode(" AND ", $filtros) : "";
-
-                        // Query principal
-                        $sql = "
-                            SELECT a.id, a.nome, a.turma, COUNT(oa.ocorrencia_id) AS total
-                            FROM alunos a
-                            LEFT JOIN ocorrencia_aluno oa ON a.id = oa.alunos_id
-                            $where
-                            GROUP BY a.id, a.nome, a.turma
-                            ORDER BY a.nome ASC
-                        ";
-
-                        $result = mysqli_query($conn, $sql);
-
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($dados = mysqli_fetch_assoc($result)) {
-                                $id = $dados['id'];
-                                $nome = $dados['nome'];
-                                $turma_id = $dados['turma'];
-                                $total = $dados['total'];
-
-                                $turma_sql = "SELECT ano, turma FROM turma WHERE id = '$turma_id'";
-                                $res_turma = mysqli_query($conn, $turma_sql);
-                                $turma_dados = mysqli_fetch_assoc($res_turma);
-                                $turma_nome = $turma_dados ? $turma_dados['ano'] . '-' . $turma_dados['turma'] : 'NÃO CADASTRADA';
-
-                                echo "
-                                <tr>
-                                    <td>$id</td>
-                                    <td>$nome</td>
-                                    <td>$turma_nome</td>
-                                    <td>$total</td>
-                                    <td>
-                                        <a href='ver-ocorrencias-aluno.php?id=$id'>
-                                            <button class='btn btn-dark btn-sm'>Ver Detalhes</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                ";
-                            }
-                        } else {
-                            echo "<tr><td colspan='5' class='text-center'>Nenhum aluno encontrado.</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <button class="offset-md-4 col-md-4 btn btn-success" id="btnExport">Exportar para Excel</button>
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
 
 </body>

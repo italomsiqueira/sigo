@@ -53,7 +53,7 @@ try {
 
     // Commit se tudo OK
     mysqli_commit($conn);
-    header('Location: ../cadastrar-ocorrencia.php?msg=sucesso');
+    header("Location: ../ver-ocorrencia.php?id=$ocorrencia_id");
     exit;
 } catch (Exception $e) {
     // Rollback em caso de erro

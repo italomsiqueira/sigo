@@ -40,7 +40,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="cadastrar-ocorrencia.php">Cadastrar ocorrência</a>
-                        <a class="dropdown-item" href="listar-ocorrencias.php">Ver ocorrências</a>
+                        <a class="dropdown-item" href="contagem-ocorrencias.php">Quantidade de ocorrência por aluno</a>
+                        <a class="dropdown-item" href="listar-ocorrencias.php">Ver todas as ocorrências</a>
                     </div>
                 </li>
 
