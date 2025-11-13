@@ -55,7 +55,17 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? 'assets/img/user-placeholder.png';
             <li><a class="dropdown-item" href="listar-ocorrencias.php"><i class="bi bi-list-ul me-1"></i>Ver todas</a></li>
           </ul>
         </li>
+
+        <!-- Link para gerenciar usuários, visível apenas para administradores -->
+        <?php if ($usuarioNivel === 'admin'): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="usuarios/listar.php">
+              <i class="bi bi-shield-lock-fill me-1"></i>Gerenciar Usuários
+            </a>
+          </li>
+        <?php endif; ?>
       </ul>
+
 
       <!-- Perfil do usuário à direita -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -73,6 +83,8 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? 'assets/img/user-placeholder.png';
           </ul>
         </li>
       </ul>
+
+
     </div>
   </div>
 </nav>
