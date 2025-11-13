@@ -16,6 +16,8 @@ $msg = $_GET['msg'] ?? '';
 <html lang="pt-BR">
 
 <head>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.png">
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/login-premium.css">
@@ -25,26 +27,44 @@ $msg = $_GET['msg'] ?? '';
 
 <body>
     <div class="login-card">
-        <img src="assets/img/logo-cinza.png" class="logo" alt="Logo">
+        <img src="assets/img/logo.png" class="logo" alt="Logo">
 
         <?php if ($msg): ?>
             <div class="alert alert-<?php
-                switch ($msg) {
-                    case 'errologin': echo 'danger'; break;
-                    case 'errosenha': echo 'danger'; break;
-                    case 'logout': echo 'success'; break;
-                    case 'naoautorizado': echo 'warning'; break;
-                    default: echo 'info';
-                }
-            ?> alert-dismissible fade show" role="alert">
+                                    switch ($msg) {
+                                        case 'errologin':
+                                            echo 'danger';
+                                            break;
+                                        case 'errosenha':
+                                            echo 'danger';
+                                            break;
+                                        case 'logout':
+                                            echo 'success';
+                                            break;
+                                        case 'naoautorizado':
+                                            echo 'warning';
+                                            break;
+                                        default:
+                                            echo 'info';
+                                    }
+                                    ?> alert-dismissible fade show" role="alert">
                 <?php
-                    switch ($msg) {
-                        case 'errologin': echo "<strong>Usuário incorreto!</strong>"; break;
-                        case 'errosenha': echo "<strong>Senha incorreta!</strong>"; break;
-                        case 'logout': echo "<strong>Logout realizado com sucesso!</strong>"; break;
-                        case 'naoautorizado': echo "<strong>Faça login para acessar o sistema.</strong>"; break;
-                        default: echo htmlspecialchars($msg);
-                    }
+                switch ($msg) {
+                    case 'errologin':
+                        echo "<strong>Usuário incorreto!</strong>";
+                        break;
+                    case 'errosenha':
+                        echo "<strong>Senha incorreta!</strong>";
+                        break;
+                    case 'logout':
+                        echo "<strong>Logout realizado com sucesso!</strong>";
+                        break;
+                    case 'naoautorizado':
+                        echo "<strong>Faça login para acessar o sistema.</strong>";
+                        break;
+                    default:
+                        echo htmlspecialchars($msg);
+                }
                 ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
