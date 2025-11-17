@@ -14,14 +14,13 @@ $rg = strtoupper($_POST['rg']);
 $cpf = strtoupper($_POST['cpf']);
 $endereco = strtoupper($_POST['endereco']);
 $tel = strtoupper($_POST['tel']);
-$escolaridade = strtoupper($_POST['escolaridade']);
 $turma = strtoupper($_POST['turma']);
 
 $sql = "
         INSERT INTO alunos
-            (nome, rg, cpf, endereco, tel, escolaridade, turma)
+            (nome, rg, cpf, endereco, tel, turma)
         VALUES
-            ('$nome', '$rg', '$cpf', '$endereco', '$tel', '$escolaridade', '$turma')
+            ('$nome', '$rg', '$cpf', '$endereco', '$tel', '$turma')
 ";
 
 if(mysqli_query($conn, $sql)){    

@@ -1,129 +1,84 @@
 <?php
 require('includes/protecao.php');
 require('includes/conexao.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php 
-$titulo = "Cadastrar aluno"; // ou outro título
-$exportFilename = "Lista de Alunos"; // se precisar do Excel
-include('layout/head.php'); 
+$titulo = "Cadastrar Aluno";
+include('layout/head.php');
+include('layout/menu.php');
 ?>
 
-<body>
-    <?php
-    include('layout/menu.php');
-    ?>
-    <p></p>
-    <div class="container-fluid">
+<div class="container mt-4">
 
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
 
+            <h3 class="mb-4">
+                <i class="bi bi-person-plus-fill me-2"></i>Cadastrar Aluno
+            </h3>
 
-        <div class="row">
-            <div class="offset-md-3 col-md-6 bloco-cadastro">
-                <h3>Cadastrar Aluno</h3>
+            <?php if (isset($_GET['msg'])): ?>
+                <div class="alert alert-<?= $_GET['msg'] == 'sucesso' ? 'success' : 'danger' ?>">
+                    <strong><?= $_GET['msg'] == 'sucesso' ? 'Salvo com sucesso!' : 'Erro ao salvar!' ?></strong>
+                </div>
+            <?php endif; ?>
 
-                <?php
+            <form action="acoes/salvar-aluno.php" method="POST" class="row g-3">
 
-                if (isset($_GET['msg'])) {
-                    $msg = $_GET['msg'];
-                    if ($msg == 'sucesso') {
-                        echo "
-                            <div class='alert alert-success col-md-12'>
-                                <strong>Salvo com sucesso!</strong>
-                            </div>
-                            ";
-                    } else {
-                        echo "
-                            <div class='alert alert-danger col-md-12'>
-                                <strong>Ops! Erro ao salvar!</strong>
-                            </div>
-                            ";
-                    }
-                }
-                ?>
-
-
-                <div class="alert alert-danger col-md-12" id="erro" hidden>
-
+                <div class="col-md-6">
+                    <label class="form-label">Nome:</label>
+                    <input type="text" name="nome" class="form-control" required autofocus>
                 </div>
 
-                <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/salvar-aluno.php">
+                <div class="col-md-6">
+                    <label class="form-label">RG:</label>
+                    <input type="text" name="rg" class="form-control">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">Nome:</label>
-                        <input type="text" class="form-control" name="nome" id="nome">
-                    </div>
-                    <div class="bloco-input">
-                        <label class="form-label">RG:</label>
-                        <input type="text" class="form-control" name="rg" id="rg">
-                    </div>
-                    <div class="bloco-input">
-                        <label class="form-label">CPF:</label>
-                        <input type="text" class="form-control" name="cpf" id="cpf">
-                    </div>
-                    <div class="bloco-input">
-                        <label class="form-label">Endereço:</label>
-                        <input type="text" class="form-control" name="endereco" id="endereco"
-                            placeholder="Ex.: Rua Dom Manoel, N 251, Centro">
-                    </div>
-                    <div class="bloco-input">
-                        <label class="form-label">Telefone:</label>
-                        <input type="text" class="form-control" name="tel" id="tel" placeholder="Ex.: (00) 9.0000-0000">
-                    </div>
+                <div class="col-md-6">
+                    <label class="form-label">CPF:</label>
+                    <input type="text" name="cpf" id="cpf" class="form-control">
+                </div>
 
-                    <script type="text/javascript">
-                        $("#tel, #celular").mask("(00) 00000-0000");
-                        $('#cpf').mask("000.000.000-00");
-                    </script>
+                <div class="col-md-6">
+                    <label class="form-label">Telefone:</label>
+                    <input type="text" name="tel" id="tel" class="form-control">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">Escolaridade</label>
-                        <select class="form-control" id="escolaridade" name="escolaridade">
-                            <option value="">Selecione....</option>
-                            <option value="fundamental_inc">Ensino fundamental incompleto</option>
-                            <option value="fundamental">Ensino fundamental completo</option>
-                            <option value="medio_inc">Ensino médio incompleto</option>
-                            <option value="medio">Ensino médio completo</option>
-                            <option value="superior_inc">Ensino superior incompleto</option>
-                            <option value="superior">Ensino superior completo</option>
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="bloco-input">
-                                <label class="form-label">Turma</label>
-                                <select class="form-control" id="turma" name="turma">
-                                    <option value="">Selecione....</option>
+                <div class="col-md-12">
+                    <label class="form-label">Endereço:</label>
+                    <input type="text" name="endereco" class="form-control"
+                        placeholder="Rua, número, bairro…">
+                </div>
 
-                                    <?php
-                                    $sql = "SELECT * FROM turma ORDER BY id ASC";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($dados = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                    <option value="<?php echo $dados['id']; ?>">
-                                        <?php echo $dados['ano'] ?> -
-                                        <?php echo $dados['turma']; ?>
-                                    </option>
-                                    <?php
-                                    }
-                                    ?>
+                <div class="col-md-6">
+                    <label class="form-label">Turma:</label>
+                    <select name="turma" class="form-select" required>
+                        <option value="">Selecione...</option>
+                        <?php
+                        $res = mysqli_query($conn, "SELECT * FROM turma ORDER BY id ASC");
+                        while ($t = mysqli_fetch_assoc($res)):
+                        ?>
+                            <option value="<?= $t['id'] ?>">
+                                <?= $t['ano'] ?> - <?= $t['turma'] ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
 
-                                </select>
-                            </div>
-                        </div>
+                <div class="col-md-12 mt-3">
+                    <button class="btn btn-success px-4">
+                        <i class="bi bi-check-circle"></i> Salvar
+                    </button>
+                    <a href="listar-alunos.php" class="btn btn-secondary px-4">Cancelar</a>
+                </div>
 
-                        <div class="offset-md-1 col-md-10">
-                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarAluno();">Salvar</button>
-                        </div>
-                </form>
-
-            </div>
+            </form>
 
         </div>
     </div>
-    </div>
-</body>
 
-</html>
+</div>
+
+<script>
+    $("#tel").mask("(00) 00000-0000");
+    $("#cpf").mask("000.000.000-00");
+</script>

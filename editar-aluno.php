@@ -1,134 +1,97 @@
 <?php
 require('includes/protecao.php');
 require('includes/conexao.php');
-$id = $_GET['id'];
-$sql = "SELECT * FROM alunos WHERE id = $id";
 
-$resultado = mysqli_query($conn, $sql);
+$id = intval($_GET['id']);
+$sql = "SELECT * FROM alunos WHERE id = $id LIMIT 1";
+$result = mysqli_query($conn, $sql);
+$al = mysqli_fetch_assoc($result);
 
-while ($dados = mysqli_fetch_assoc($resultado)) {
-    $id = $dados['id'];
-    $nome = $dados['nome'];
-    $rg = $dados['rg'];
-    $cpf = $dados['cpf'];
-    $endereco = $dados['endereco'];
-    $tel = $dados['tel'];
-    $turma = $dados['turma'];
+if (!$al) {
+    header("Location: listar-alunos.php?msg=erro");
+    exit;
 }
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
-$titulo = "Editar aluno"; // ou outro título
-$exportFilename = "Lista de Alunos"; // se precisar do Excel
+$titulo = "Editar Aluno";
 include('layout/head.php');
+include('layout/menu.php');
 ?>
 
-<body>
+<div class="container mt-4">
 
-    <?php
-    include('layout/menu.php');
-    ?>
-    <p></p>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="offset-md-3 col-md-6 bloco-cadastro">
-                <h3>Alterar -
-                    <?php echo $nome ?>
-                </h3>
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
 
-                <?php
+            <h3 class="mb-4">
+                <i class="bi bi-pencil-square me-2"></i>Editar Aluno — <?= htmlspecialchars($al['nome']) ?>
+            </h3>
 
-                if (isset($_GET['msg'])) {
-                    $msg = $_GET['msg'];
-                    if ($msg == 'sucesso') {
-                        echo "
-                            <div class='alert alert-success col-md-12'>
-                                <strong>Salvo com sucesso!</strong>
-                            </div>
-                            ";
-                    } else {
-                        echo "
-                            <div class='alert alert-danger col-md-12'>
-                                <strong>Ops! Erro ao salvar!</strong>
-                            </div>
-                            ";
-                    }
-                }
-                ?>
+            <?php if (isset($_GET['msg'])): ?>
+                <div class="alert alert-<?= $_GET['msg'] == 'sucesso' ? 'success' : 'danger' ?>">
+                    <strong><?= $_GET['msg'] == 'sucesso' ? 'Alterado com sucesso!' : 'Erro ao alterar!' ?></strong>
+                </div>
+            <?php endif; ?>
 
+            <form action="acoes/editar-aluno.php" method="POST" class="row g-3">
 
-                <div class="alert alert-danger col-md-12" id="erro" hidden>
+                <input type="hidden" name="id" value="<?= $al['id'] ?>">
 
+                <div class="col-md-6">
+                    <label class="form-label">Nome:</label>
+                    <input type="text" name="nome" class="form-control" value="<?= $al['nome'] ?>" required>
                 </div>
 
-                <form id="form-cadastro" onsubmit="return false" method="POST" action="acoes/editar-aluno.php">
-                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <div class="bloco-input">
-                        <label class="form-label">Nome:</label>
-                        <input type="text" class="form-control" name="nome" id="nome" value="<?php echo $nome ?>">
-                    </div>
+                <div class="col-md-6">
+                    <label class="form-label">RG:</label>
+                    <input type="text" name="rg" class="form-control" value="<?= $al['rg'] ?>">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">RG:</label>
-                        <input type="text" class="form-control" name="rg" id="rg" value="<?php echo $rg ?>">
-                    </div>
+                <div class="col-md-6">
+                    <label class="form-label">CPF:</label>
+                    <input type="text" name="cpf" id="cpf" class="form-control" value="<?= $al['cpf'] ?>">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">CPF:</label>
-                        <input type="text" class="form-control" name="cpf" id="cpf" value="<?php echo $cpf ?>">
-                    </div>
+                <div class="col-md-6">
+                    <label class="form-label">Telefone:</label>
+                    <input type="text" name="tel" id="tel" class="form-control" value="<?= $al['tel'] ?>">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">Endereço:</label>
-                        <input type="text" class="form-control" name="endereco" id="endereco"
-                            value="<?php echo $endereco ?>">
-                    </div>
+                <div class="col-md-12">
+                    <label class="form-label">Endereço:</label>
+                    <input type="text" name="endereco" class="form-control"
+                        value="<?= $al['endereco'] ?>">
+                </div>
 
-                    <div class="bloco-input">
-                        <label class="form-label">Telefone:</label>
-                        <input type="text" class="form-control" name="tel" id="tel" value="<?php echo $tel ?>">
-                    </div>
+                <div class="col-md-6">
+                    <label class="form-label">Turma:</label>
+                    <select name="turma" class="form-select">
+                        <option value="">Selecione...</option>
+                        <?php
+                        $res = mysqli_query($conn, "SELECT * FROM turma ORDER BY id ASC");
+                        while ($t = mysqli_fetch_assoc($res)):
+                        ?>
+                            <option value="<?= $t['id'] ?>" <?= $t['id'] == $al['turma'] ? 'selected' : '' ?>>
+                                <?= $t['ano'] ?> - <?= $t['turma'] ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="bloco-input">
-                                <label class="form-label">Turma</label>
-                                <select class="form-control" id="turma" name="turma">
-                                    <option value="">Selecione....</option>
+                <div class="col-md-12 mt-3">
+                    <button class="btn btn-primary px-4">
+                        <i class="bi bi-check-circle"></i> Salvar alterações
+                    </button>
+                    <a href="listar-alunos.php" class="btn btn-secondary px-4">Cancelar</a>
+                </div>
 
-                                    <?php
-                                    $sql = "SELECT * FROM turma ORDER BY id ASC";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($dados = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                        <option value="<?php echo $dados['id'] ?>" <?php if ($dados['id'] == $turma) { ?>
-                                            selected
-                                            <?php } ?>>
-                                            <?php echo $dados['ano'] ?> -
-                                            <?php echo $dados['turma']; ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
-
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="offset-md-1 col-md-10">
-                            <button class="btn btn-dark col-md-12 btn-salvar" onclick="validarEdicaoAluno();">Salvar</button>
-                        </div>
-                </form>
-
-            </div>
+            </form>
 
         </div>
     </div>
-    </div>
-</body>
 
-</html>
+</div>
+
+<script>
+    $("#tel").mask("(00) 00000-0000");
+    $("#cpf").mask("000.000.000-00");
+</script>

@@ -20,5 +20,5 @@ if (!empty($_FILES['foto']['name'])) {
 $sql = "INSERT INTO usuarios (nome, login, senha, nivel, foto) VALUES ('$nome', '$login', '$senha', '$nivel', '$foto')";
 mysqli_query($conn, $sql);
 
-header("Location: ../usuarios/listar.php?msg=Usuário cadastrado com sucesso!");
+header("Location: ../usuarios-listar.php?msg=Usuário cadastrado com sucesso!");
 exit;

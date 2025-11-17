@@ -15,5 +15,5 @@ if ($q && $r = mysqli_fetch_assoc($q)) {
 // Exclui o usuário
 mysqli_query($conn, "DELETE FROM usuarios WHERE id=$id");
 
-header("Location: ../usuarios/listar.php?msg=Usuário excluído com sucesso!");
+header("Location: ../usuarios-listar.php?msg=Usuário excluído com sucesso!");
 exit;

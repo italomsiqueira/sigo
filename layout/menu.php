@@ -59,7 +59,7 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? 'assets/img/user-placeholder.png';
         <!-- Link para gerenciar usuários, visível apenas para administradores -->
         <?php if ($usuarioNivel === 'admin'): ?>
           <li class="nav-item">
-            <a class="nav-link" href="usuarios/listar.php">
+            <a class="nav-link" href="usuarios-listar.php">
               <i class="bi bi-shield-lock-fill me-1"></i>Gerenciar Usuários
             </a>
           </li>

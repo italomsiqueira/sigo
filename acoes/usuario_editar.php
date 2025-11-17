@@ -27,5 +27,5 @@ if (!empty($senha)) {
 }
 
 mysqli_query($conn, $sql);
-header("Location: ../usuarios/listar.php?msg=Usuário atualizado com sucesso!");
+header("Location: ../usuarios-listar.php?msg=Usuário atualizado com sucesso!");
 exit;
