@@ -48,7 +48,12 @@ $res = mysqli_query($conn, $sql);
 <?php include('layout/menu.php'); ?>
 <div class="container mt-4">
 
-    <h3 class="text-center mb-4">Lista de Ocorrências</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4><i class="bi bi-journal-text me-2"></i>Lista de Ocorrências</h4>
+        <a href="cadastrar-ocorrencia.php" class="btn btn-dark btn-lg">
+            <i class="bi bi-plus-circle me-1"></i> Cadastrar Ocorrência 
+        </a>
+    </div>
 
     <!-- FILTROS -->
     <form class="row g-3 mb-4" method="GET">
@@ -88,7 +93,7 @@ $res = mysqli_query($conn, $sql);
                 <tr>
                     <th>ID</th>
                     <th>Data</th>
-                    <th>Descrição</th>
+                    <th style="width: 40%;">Descrição</th>
                     <th>Alunos Envolvidos</th>
                     <th class="text-center">Ações</th>
                 </tr>

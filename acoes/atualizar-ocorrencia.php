@@ -8,7 +8,7 @@ if (!isset($_POST['id'], $_POST['data'], $_POST['descricao'])) {
 
 $id = intval($_POST['id']);
 $data = $_POST['data'];
-$descricao = strtoupper(trim($_POST['descricao']));
+$descricao = mb_strtoupper(trim($_POST['descricao']), 'UTF-8');
 $alunos = isset($_POST['alunos']) ? $_POST['alunos'] : [];
 
 // Transação para segurança

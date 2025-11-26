@@ -82,6 +82,13 @@ include('layout/head.php');
     <p></p>
     <div class="container mt-4">
 
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4></h4>
+            <a href="cadastrar-ocorrencia.php" class="btn btn-outline-primary">
+                <i class="bi bi-plus-circle me-1"></i> Cadastrar ocorrência
+            </a>
+        </div>
+
         <?php
         if (!isset($_GET['id']) || empty($_GET['id'])) {
             echo "<div class='alert alert-danger'>Ocorrência não encontrada!</div>";

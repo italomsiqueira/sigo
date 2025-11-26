@@ -18,7 +18,7 @@ if (!isset($_POST['alunos']) || !is_array($_POST['alunos']) || count($_POST['alu
 }
 
 $data = $_POST['data'];
-$descricao = strtoupper(trim($_POST['descricao']));
+$descricao = mb_strtoupper(trim($_POST['descricao']), 'UTF-8');
 $alunos = $_POST['alunos']; // array de ids
 
 // Começa transação (para garantir atomicidade)

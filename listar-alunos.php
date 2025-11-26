@@ -73,9 +73,9 @@ include('layout/menu.php');
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Nome</th>
+                            <th style="width: 30%;">Nome</th>
                             <th>CPF</th>
-                            <th>Endereço</th>
+                            <th style="width: 30%;">Endereço</th>
                             <th>Telefone</th>
                             <th>Turma</th>
                             <th style="width: 130px;">Ações</th>

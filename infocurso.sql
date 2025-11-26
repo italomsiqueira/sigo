@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/11/2025 às 13:13
+-- Tempo de geração: 26/11/2025 às 11:45
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -221,14 +221,80 @@ INSERT INTO `alunos` (`id`, `nome`, `rg`, `cpf`, `endereco`, `tel`, `escolaridad
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `aluno_score`
+--
+
+CREATE TABLE `aluno_score` (
+  `aluno_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL DEFAULT 0,
+  `last_recalc` datetime DEFAULT NULL,
+  `suspension_alert` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `config`
+--
+
+CREATE TABLE `config` (
+  `cfg_key` varchar(100) NOT NULL,
+  `cfg_value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `niveis_ocorrencia`
+--
+
+CREATE TABLE `niveis_ocorrencia` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `peso` int(11) NOT NULL DEFAULT 1,
+  `dias_expiracao` int(11) NOT NULL DEFAULT 30,
+  `descricao` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `ocorrencia`
 --
 
 CREATE TABLE `ocorrencia` (
   `id` int(11) NOT NULL,
   `data` date NOT NULL,
-  `descricao` text NOT NULL
+  `descricao` text NOT NULL,
+  `nivel_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ocorrencia`
+--
+
+INSERT INTO `ocorrencia` (`id`, `data`, `descricao`, `nivel_id`, `created_at`) VALUES
+(1, '2025-11-18', 'USO DE CELULAR NA ESCOLA', NULL, '2025-11-19 14:10:17'),
+(2, '2025-11-18', 'SEM FARDA', NULL, '2025-11-19 14:10:47'),
+(3, '2025-11-17', 'SEM FARDA', NULL, '2025-11-19 14:11:39'),
+(4, '2025-11-12', 'JOGANDO BOLA EM LOCAL PROIBIDO, ACABARAM QUEBRANDO UMA PORTA DE SALA DE AULA', NULL, '2025-11-19 14:13:38'),
+(5, '2025-11-13', 'NÃO ESTAVA COM LIVRO DA DISCIPLINA DE CIÊNCIAS', NULL, '2025-11-19 14:15:17'),
+(6, '2025-11-14', 'JOGOU O CHINELO EM DIREÇÃO AO COLEGA YURI', NULL, '2025-11-19 14:15:50'),
+(7, '2025-11-14', 'VEIO SEM A BLUSA DA FARDA', NULL, '2025-11-19 14:18:53'),
+(8, '2025-11-19', 'NÃO RETORNARAM A SALA APÓS O INTERVALO', NULL, '2025-11-19 14:21:00'),
+(9, '2025-11-11', 'FOI RETIRADO DE SALA POR NÃO FAZER A ATIVIDADE', NULL, '2025-11-19 14:36:32'),
+(10, '2025-11-19', 'CHEGOU ATRASADO EM SALA APÓS O INTERVALO', NULL, '2025-11-19 14:37:13'),
+(11, '2025-11-05', 'CHEGOU ATRASADO APÓS O INTERVALO', NULL, '2025-11-19 14:38:06'),
+(12, '2025-11-10', 'JOGANDO BOLA DE PAPEL E RESPONDEU A PROFESSORA COM IGNORÂNCIA', NULL, '2025-11-19 14:39:01'),
+(13, '2025-11-04', 'CONFUSÃO ENVOLVENDO O CÍCERO QUE COMEÇOU COM UMA FOFOCA E ACABOU COM UMA BRIGA COM DIREITO A JOGAR UMA CADEIRA', NULL, '2025-11-19 14:40:36'),
+(14, '2025-11-05', 'DESCUMPRIMENTO DAS REGRAS DA ESCOLA.', NULL, '2025-11-19 14:48:42'),
+(15, '2025-11-04', 'USO DE CELULAR', NULL, '2025-11-19 14:50:30'),
+(16, '2025-11-03', 'DEMORARAM A IR PARA A SALA APÓS O INTERVALO', NULL, '2025-11-19 14:52:12'),
+(17, '2025-10-30', 'NÃO COMPARECEU A SALA APÓS O INTERVALO', NULL, '2025-11-19 14:54:11'),
+(18, '2025-10-29', 'JOGANDO BOLA DENTRO DA SALA DE AULA', NULL, '2025-11-24 08:44:47'),
+(19, '2025-10-29', 'NÃO ESTAVA COM LIVRO DE PORTUGUÊS', NULL, '2025-11-24 08:45:09'),
+(20, '2025-10-28', 'TROCARAM OFENSAS', NULL, '2025-11-24 08:50:10');
 
 -- --------------------------------------------------------
 
@@ -241,6 +307,53 @@ CREATE TABLE `ocorrencia_aluno` (
   `ocorrencia_id` int(11) NOT NULL,
   `alunos_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ocorrencia_aluno`
+--
+
+INSERT INTO `ocorrencia_aluno` (`id`, `ocorrencia_id`, `alunos_id`) VALUES
+(1, 1, 57),
+(4, 3, 33),
+(5, 2, 97),
+(6, 4, 86),
+(7, 4, 115),
+(8, 4, 92),
+(9, 4, 93),
+(10, 4, 97),
+(11, 4, 133),
+(14, 7, 23),
+(19, 8, 37),
+(20, 8, 43),
+(21, 8, 48),
+(22, 8, 50),
+(23, 6, 18),
+(24, 5, 104),
+(25, 9, 35),
+(26, 10, 50),
+(27, 11, 42),
+(28, 11, 52),
+(29, 12, 60),
+(30, 13, 35),
+(31, 13, 52),
+(32, 14, 46),
+(33, 14, 48),
+(34, 14, 51),
+(35, 15, 36),
+(36, 16, 88),
+(37, 16, 97),
+(38, 16, 99),
+(39, 17, 30),
+(40, 17, 33),
+(41, 17, 46),
+(42, 17, 51),
+(43, 18, 65),
+(44, 18, 70),
+(45, 18, 76),
+(46, 18, 83),
+(47, 19, 39),
+(48, 20, 19),
+(49, 20, 28);
 
 -- --------------------------------------------------------
 
@@ -317,6 +430,24 @@ ALTER TABLE `alunos`
   ADD KEY `turma` (`turma`);
 
 --
+-- Índices de tabela `aluno_score`
+--
+ALTER TABLE `aluno_score`
+  ADD PRIMARY KEY (`aluno_id`);
+
+--
+-- Índices de tabela `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`cfg_key`);
+
+--
+-- Índices de tabela `niveis_ocorrencia`
+--
+ALTER TABLE `niveis_ocorrencia`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
@@ -354,16 +485,22 @@ ALTER TABLE `alunos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
+-- AUTO_INCREMENT de tabela `niveis_ocorrencia`
+--
+ALTER TABLE `niveis_ocorrencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `ocorrencia`
 --
 ALTER TABLE `ocorrencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `ocorrencia_aluno`
 --
 ALTER TABLE `ocorrencia_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de tabela `turma`

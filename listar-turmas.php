@@ -74,7 +74,7 @@ $sql = "
                             <td><?= $turma['total_alunos'] ?></td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="<?= $urlEditar ?>" class="btn btn-info btn-sm rounded-circle p-2" title="Editar">
+                                    <a href="<?= $urlEditar ?>" class="btn btn-primary btn-sm rounded-circle p-2" title="Editar">
                                         <i class="bi bi-pencil-fill"></i>
                                     </a>
                                     <a href="<?= $urlDeletar ?>" 
@@ -83,7 +83,7 @@ $sql = "
                                         <i class="bi bi-trash-fill"></i>
                                     </a>
                                     <a href="<?= $urlVer ?>" class="btn btn-success btn-sm rounded-circle p-2" title="Ver Alunos">
-                                        <i class="bi bi-people-fill"></i>
+                                        <i class="bi bi-eye-fill"></i>
                                     </a>
                                 </div>
                             </td>
